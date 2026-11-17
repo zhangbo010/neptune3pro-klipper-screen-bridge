@@ -387,7 +387,10 @@ stage_flash() {
   else
     bin="$REPO_DIR/artifacts/klipper_F401_USART2_J17_bridge.bin"
   fi
-  [[ -f "$bin" ]] || die "找不到固件：$bin"
+  [[ -f "$bin" ]] || {
+    if [[ $DRY_RUN -eq 1 ]]; then info "DRY-RUN: 固件尚不存在（--build 后会生成）：$bin"; return; fi
+    die "找不到固件：$bin"
+  }
 
   if [[ ! -f "$KATAPULT_DIR/scripts/flashtool.py" ]]; then
     info "克隆 Katapult（只为用 flashtool.py）"
