@@ -1,0 +1,14 @@
+[Unit]
+Description=KlipperLCD Service (Neptune 3 Pro TJC Screen via /tmp/ttyTJC)
+After=klipper.service moonraker.service
+
+[Service]
+Type=simple
+User=klipper
+WorkingDirectory=/home/klipper/KlipperLCD
+Restart=always
+RestartSec=2
+ExecStart=/usr/bin/env python3 -u /home/klipper/KlipperLCD/main.py
+
+[Install]
+WantedBy=multi-user.target

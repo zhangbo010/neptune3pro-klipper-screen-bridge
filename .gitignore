@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# 备份与本地产物
+*.bak
+*.bak.*
+*.orig
+out/
+*.log
+
+# 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

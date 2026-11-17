@@ -1,0 +1,12 @@
+# 统一换行：源码/脚本一律 LF（Linux 端直接运行）
+* text=auto eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.c text eol=lf
+*.md text eol=lf
+*.cfg text eol=lf
+
+# 二进制文件不要做换行/文本处理
+*.pdf -text
+*.bin -text
+*.tft -text

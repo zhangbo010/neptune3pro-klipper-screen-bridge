@@ -1,0 +1,26 @@
+﻿海王星3 / ZNP Robin Nano_DW V2.2（STM32F401RCT6）烧录说明
+
+两个文件都要烧，顺序和地址如下：
+
+1. katapult_F401_USART2_J17.bin
+   烧录地址：0x08000000（Flash 起始）
+
+2. klipper_F401_USART2_J17.bin
+   烧录地址：0x08004000（16KiB 偏移）
+
+不要把 klipper.bin 单独烧到 0x08000000，否则没有引导，后面也无法用串口升级。
+
+配置（已编进固件，不用改）：
+- 晶振 8 MHz，内核 84 MHz
+- 通讯：USART2 PA3/PA2 = 主板 J17，波特率 250000
+- 不是板载 CH340 / USART1 那一路
+
+建议用 STM32CubeProgrammer 或 ST-Link，连接方式选 Connect under reset（复位下连接）。烧完掉电再上电。
+
+烧好后，MCU 与树莓派走 J17 ↔ Pi UART0（/dev/ttyS0）：
+- J17 针2 GND 共地
+- J17 针3 TXD2（MCU TX）接到 Pi RX
+- J17 针4 RXD2（MCU RX）接到 Pi TX
+若板上 WiFi 模块还在 J17 上并联，可能抢串口，需要拔掉或拉低使能。
+
+本包由 Mac 按与树莓派相同的菜单配置重编（树莓派当时已离线，bin 字节与先前那份不会完全一样，地址和通讯方式一致）。
